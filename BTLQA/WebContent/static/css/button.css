@@ -1,0 +1,188 @@
+.mybutton {
+	background-color: rgb(0, 180, 252);
+	border-radius: 15px;
+	border: none;
+	color: black;
+	padding: 15px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 18px;
+	height: 50px;
+	width: 175px;
+}
+.login-button {
+	background-color: #00b4fcbf;
+	border-radius: 15px;
+	border: none;
+	color: black;
+	padding: 15px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 18px;
+	height: 50px;
+	width: 150px;
+}
+
+.find-button {
+	background-image: url(../images/find.png);
+	background-repeat: no-repeat;
+	background-size: 25%;
+	background-position: left;
+	background-color: #e8da46;
+	border-radius: 15px;
+	border: none;
+	color: black;
+	padding: 15px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 18px;
+	height: 50px;
+	width: 175px;
+}
+
+.export-button {
+	background-image: url(../images/export-excel.png);
+	background-repeat: no-repeat;
+	background-size: 25%;
+	background-position: left;
+	background-color: #ddd;
+	border-radius: 15px;
+	border: none;
+	color: black;
+	padding: 15px;
+	text-align: right;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 18px;
+	height: 50px;
+	width: 175px;
+}
+
+.reset-button {
+	background-image: url(../images/reset.png);
+	background-repeat: no-repeat;
+	background-size: 25%;
+	background-position: left;
+	background-color: rgb(78, 202, 76);
+	border-radius: 15px;
+	border: none;
+	color: black;
+	padding: 15px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 18px;
+	height: 50px;
+	width: 175px;
+}
+
+.logout-button {
+	background-image: url(../images/logout.png);
+	background-repeat: no-repeat;
+	background-size: 30%;
+	background-position: left;
+	background-color: rgb(253, 71, 71);
+	border-radius: 15px;
+	border: none;
+	color: black;
+	padding: 15px;
+	text-align: right;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 18px;
+	height: 50px;
+	width: 150px;
+}
+
+.update-button {
+	background-image: url(../images/reset.png);
+	background-repeat: no-repeat;
+	background-size: 35%;
+	background-position: center;
+	background-color: rgb(0, 180, 252);
+	border-radius: 15px;
+	border: none;
+	color: black;
+	padding: 15px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 18px;
+	height: 50px;
+	width: 75px;
+}
+
+.delete-button {
+	background-image: url(../images/delete.png);
+	background-repeat: no-repeat;
+	background-size: 30%;
+	background-position: center;
+	background-color: rgb(228, 39, 39);
+	border-radius: 15px;
+	border: none;
+	color: black;
+	padding: 15px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 18px;
+	height: 50px;
+	width: 75px;
+}
+
+.delete-noicon-button {
+	background-image: url(../images/delete.png);
+	background-repeat: no-repeat;
+	background-size: 25%;
+	background-position: left;
+	background-color: rgb(228, 39, 39);
+	border-radius: 15px;
+	border: none;
+	color: black;
+	padding: 15px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 18px;
+	height: 50px;
+	width: 150px;
+}
+
+.add-button {
+	background-image: url(../images/add.png);
+	background-repeat: no-repeat;
+	background-size: 30%;
+	background-position: left;
+	background-color: rgb(78, 202, 76);
+	border-radius: 15px;
+	border: none;
+	color: black;
+	padding: 15px;
+	text-align: right;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 18px;
+	height: 50px;
+	width: 150px;
+}
+
+.cancel-button {
+	background-image: url(../images/cancel.png);
+	background-repeat: no-repeat;
+	background-size: 25%;
+	background-position: left;
+	background-color: #aec5a9;
+	border-radius: 15px;
+	border: none;
+	color: black;
+	padding: 15px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 18px;
+	height: 50px;
+	width: 150px;
+}

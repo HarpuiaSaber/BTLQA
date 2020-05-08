@@ -1,0 +1,13 @@
+.delete-alert {
+	position: fixed;
+	top: 30%;
+	left: 40%;
+	margin: auto;
+	padding: 1.5%;
+	width: 305px;
+	height: 150px;
+	z-index: 1;
+	border: 1px solid red;
+	background-color: #ddd;
+	border-radius: 15px;
+}

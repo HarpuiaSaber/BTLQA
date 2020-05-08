@@ -1,0 +1,27 @@
+.header {
+	display: flex;
+	background-image: url(../images/nen_bg.png);
+	background-repeat: no-repeat;
+	background-size: 100%;
+	background-position: center;
+	height: 120px;
+}
+
+.text {
+	width: 30%;
+	left: 10%;
+	position: relative;
+}
+
+.logout {
+	position: absolute;
+	right: 0.5%
+}
+
+.image {
+	position: relative;
+	margin: auto;
+	margin-right: 1%;
+	width: 55%;
+	height: 200px
+}

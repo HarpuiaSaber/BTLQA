@@ -1,0 +1,18 @@
+.input-select {
+	color: black;
+	height: 40px;
+	width: 89%;
+	background-color: #d5f1f2;
+	border-radius: 5px;
+	outline: none;
+	font-size: 16px;
+}
+.select-select {
+	color: black;
+	height: 40px;
+	width: 320px;
+	background-color: #d5f1f2;
+	border-radius: 5px;
+	outline: none;
+	font-size: 16px;
+}

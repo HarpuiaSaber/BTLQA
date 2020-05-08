@@ -1,0 +1,9 @@
+eclipse.preferences.version=1
+encoding//WebContent/static/css/input.css=UTF-8
+encoding//src/controller/ErrorController.java=UTF-8
+encoding//src/controller/LoginController.java=UTF-8
+encoding//src/controller/LogoutController.java=UTF-8
+encoding//src/service/impl/InsuranceServiceImpl.java=UTF-8
+encoding//src/service/impl/UserGettingHistoryServiceImpl.java=UTF-8
+encoding//src/service/impl/UserPaymentHistoryServiceImpl.java=UTF-8
+encoding/<project>=UTF-8
