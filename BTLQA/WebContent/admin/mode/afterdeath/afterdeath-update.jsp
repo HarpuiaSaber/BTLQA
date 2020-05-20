@@ -16,7 +16,7 @@
 </head>
 <body>
 	<jsp:include page="/admin/include/menu.jsp" />
-	<h2>Cập nhật chế đô tuất BHXH</h2>
+	<h2>Cập nhật chế độ tuất BHXH</h2>
 	<div>
 		<form
 			action="<c:url value= '/admin/mode/afterdeath/update?id=${mode.id }'/>"

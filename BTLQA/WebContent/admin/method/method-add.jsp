@@ -24,7 +24,7 @@
 					<tr>
 						<td><label>Hình thức</label></td>
 						<th><input class="input-add" type="text" name="name" required
-							id="name" /></th>
+							id="name" autofocus/></th>
 					</tr>
 					<tr>
 						<td><label>Số tháng</label></td>

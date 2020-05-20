@@ -84,7 +84,7 @@ public class ExportGettingHistoryController extends HttpServlet {
 			isEmpty = true;
 		}
 
-		if (isEmpty) {
+		if (!isEmpty) {
 			HttpSession httpSession = req.getSession();
 			Object object = httpSession.getAttribute("searchI");
 			if (object != null) {
