@@ -63,4 +63,12 @@ public class StringUtils {
 			return null;
 		}
 	}
+	public static Date convertToDate(String str, String format) {
+		try {
+			SimpleDateFormat formatter2 = new SimpleDateFormat(format);
+			return formatter2.parse(str);
+		}catch (Exception e) {
+			return null;
+		}
+	}
 }

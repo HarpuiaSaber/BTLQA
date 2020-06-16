@@ -1,5 +1,6 @@
 package test;
 
+import java.util.Date;
 import java.util.List;
 
 import org.junit.Assert;
@@ -9,6 +10,7 @@ import dao.UserPaymentHistoryDao;
 import dao.impl.UserPaymentHistoryDaoImpl;
 import model.Search;
 import model.UserPaymentHistory;
+import utils.StringUtils;
 public class TestPaymenHistoryDao {
 
 	private UserPaymentHistoryDao uphDao = new UserPaymentHistoryDaoImpl();
@@ -33,42 +35,42 @@ public class TestPaymenHistoryDao {
 		}
 	}
 	
-	@Test
-	public void test2() {
-		// init
-		String name = "Nguyễn Quang Toàn";
-		search = new Search();
-		search.setName(name);
-
-		// get result by dao function
-		uphList = uphDao.search(search);
-		// test
-		Assert.assertNotNull(uphList);
-		Assert.assertEquals(1, uphList.size());
-		for (UserPaymentHistory history : uphList) {
-			Assert.assertEquals(name,
-					history.getInsurance().getUser().getName());
-		}
-	}
-	
-
-	@Test
-	public void test3() {
-		// init
-		String name = "Nguyễn Quang Toàn";
-		search = new Search();
-		search.setName(name);
-
-		// get result by dao function
-		uphList = uphDao.search(search);
-		// test
-		Assert.assertNotNull(uphList);
-		Assert.assertEquals(1, uphList.size());
-		for (UserPaymentHistory history : uphList) {
-			Assert.assertEquals(name,
-					history.getInsurance().getUser().getName());
-		}
-	}
+//	@Test
+//	public void test2() {
+//		// init
+//		String idDistrict = "1";
+//		search = new Search();
+//		search.setIdDistrict(idDistrict);
+//
+//		// get result by dao function
+//		uphList = uphDao.search(search);
+//		// test
+//		Assert.assertNotNull(uphList);
+//		Assert.assertEquals(1, uphList.size());
+//		for (UserPaymentHistory history : uphList) {
+//			Assert.assertEquals(idDistrict,
+//					history.getInsurance().getUser().getVillage().getDistrict().getId());
+//		}
+//	}
+//	
+//
+//	@Test
+//	public void test3() {
+//		// init
+//		String idVillage = "1";
+//		search = new Search();
+//		search.setIdVillage(idVillage);
+//
+//		// get result by dao function
+//		uphList = uphDao.search(search);
+//		// test
+//		Assert.assertNotNull(uphList);
+//		Assert.assertEquals(1, uphList.size());
+//		for (UserPaymentHistory history : uphList) {
+//			Assert.assertEquals(idVillage,
+//					history.getInsurance().getUser().getVillage().getId());
+//		}
+//	}
 	
 	@Test
 	public void test4() {
@@ -107,9 +109,9 @@ public class TestPaymenHistoryDao {
 	@Test
 	public void test6() {
 		// init
-		String name = "Nguyễn Quang Toàn";
+		Date dob = StringUtils.convertToDate("1998-01-07");
 		search = new Search();
-		search.setName(name);
+		search.setDob(dob);
 
 		// get result by dao function
 		uphList = uphDao.search(search);
@@ -117,8 +119,8 @@ public class TestPaymenHistoryDao {
 		Assert.assertNotNull(uphList);
 		Assert.assertEquals(1, uphList.size());
 		for (UserPaymentHistory history : uphList) {
-			Assert.assertEquals(name,
-					history.getInsurance().getUser().getName());
+			Assert.assertTrue(dob.equals(
+					history.getInsurance().getUser().getDob()));
 		}
 	}
 	@Test
