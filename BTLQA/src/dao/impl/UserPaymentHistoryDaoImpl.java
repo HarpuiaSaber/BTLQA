@@ -9,12 +9,15 @@ import java.util.List;
 
 import dao.DaoConnection;
 import dao.UserPaymentHistoryDao;
+import model.District;
 import model.Insurance;
 import model.Method;
 import model.Paging;
+import model.Province;
 import model.Search;
 import model.User;
 import model.UserPaymentHistory;
+import model.Village;
 
 public class UserPaymentHistoryDaoImpl extends DaoConnection implements UserPaymentHistoryDao {
 
@@ -24,7 +27,7 @@ public class UserPaymentHistoryDaoImpl extends DaoConnection implements UserPaym
 //		Connection connection = pool.getConnection();
 		List<UserPaymentHistory> histories = new ArrayList<UserPaymentHistory>();
 		StringBuilder sql = new StringBuilder();
-		sql.append("SELECT pa.*, m.name AS mName, u.name AS uName, u.identityCard");
+		sql.append("SELECT pa.*, m.name AS mName, u.name AS uName, u.identityCard, u.dob, u.idVillage, v.idDistrict, d.idProvince");
 		sql.append(" FROM user_payment_history AS pa");
 		sql.append(" INNER JOIN insurance AS i ON i.id = pa.idInsurance");
 		sql.append(" INNER JOIN method AS m ON m.id = i.idMethod");
@@ -88,7 +91,17 @@ public class UserPaymentHistoryDaoImpl extends DaoConnection implements UserPaym
 				insurance.setId(resultSet.getLong("idInsurance"));
 				User user = new User();
 				user.setName(resultSet.getString("uName"));
+				user.setDob(new Date(resultSet.getDate("dob").getTime()));
 				user.setIdentityCard(resultSet.getLong("identityCard"));
+				Province province = new Province();
+				province.setId(resultSet.getString("idProvince"));
+				District district = new District();
+				district.setId(resultSet.getString("idDistrict"));
+				district.setProvince(province);
+				Village village = new Village();
+				village.setId(resultSet.getString("idVillage"));
+				village.setDistrict(district);
+				user.setVillage(village);
 				insurance.setUser(user);
 				Method method = new Method();
 				method.setName(resultSet.getString("mName"));
@@ -101,10 +114,10 @@ public class UserPaymentHistoryDaoImpl extends DaoConnection implements UserPaym
 				histories.add(history);
 			}
 		} catch (SQLException e) {
-			//pool.freeConnection(connection);
+			// pool.freeConnection(connection);
 			e.printStackTrace();
 		}
-		//pool.freeConnection(connection);
+		// pool.freeConnection(connection);
 		return histories;
 	}
 
@@ -115,7 +128,8 @@ public class UserPaymentHistoryDaoImpl extends DaoConnection implements UserPaym
 		List<UserPaymentHistory> histories = new ArrayList<UserPaymentHistory>();
 		StringBuilder sql = new StringBuilder();
 		sql.append("SELECT * FROM (SELECT ROW_NUMBER() OVER(ORDER BY pa.time, pa.id) AS row_num,");
-		sql.append(" pa.*, m.name AS mName, u.name AS uName, u.identityCard");
+		sql.append(
+				" pa.*, m.name AS mName, u.name AS uName, u.identityCard, u.dob, u.idVillage, v.idDistrict, d.idProvince");
 		sql.append(" FROM user_payment_history AS pa");
 		sql.append(" INNER JOIN insurance AS i ON i.id = pa.idInsurance");
 		sql.append(" INNER JOIN method AS m ON m.id = i.idMethod");
@@ -182,7 +196,17 @@ public class UserPaymentHistoryDaoImpl extends DaoConnection implements UserPaym
 				insurance.setId(resultSet.getLong("idInsurance"));
 				User user = new User();
 				user.setName(resultSet.getString("uName"));
+				user.setDob(new Date(resultSet.getDate("dob").getTime()));
 				user.setIdentityCard(resultSet.getLong("identityCard"));
+				Province province = new Province();
+				province.setId(resultSet.getString("idProvince"));
+				District district = new District();
+				district.setId(resultSet.getString("idDistrict"));
+				district.setProvince(province);
+				Village village = new Village();
+				village.setId(resultSet.getString("idVillage"));
+				village.setDistrict(district);
+				user.setVillage(village);
 				insurance.setUser(user);
 				Method method = new Method();
 				method.setName(resultSet.getString("mName"));
@@ -195,10 +219,10 @@ public class UserPaymentHistoryDaoImpl extends DaoConnection implements UserPaym
 				histories.add(history);
 			}
 		} catch (SQLException e) {
-			//pool.freeConnection(connection);
+			// pool.freeConnection(connection);
 			e.printStackTrace();
 		}
-		//pool.freeConnection(connection);
+		// pool.freeConnection(connection);
 		return histories;
 	}
 
@@ -268,14 +292,14 @@ public class UserPaymentHistoryDaoImpl extends DaoConnection implements UserPaym
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				int total = resultSet.getInt("totalRecord");
-				//pool.freeConnection(connection);
+				// pool.freeConnection(connection);
 				return total;
 			}
 		} catch (SQLException e) {
-			//pool.freeConnection(connection);
+			// pool.freeConnection(connection);
 			e.printStackTrace();
 		}
-		//pool.freeConnection(connection);
+		// pool.freeConnection(connection);
 		return 0;
 	}
 

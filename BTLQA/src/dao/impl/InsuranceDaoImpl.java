@@ -27,7 +27,7 @@ public class InsuranceDaoImpl extends DaoConnection implements InsuranceDao {
 //		Connection connection = pool.getConnection();
 		StringBuilder sql = new StringBuilder();
 		sql.append(
-				"SELECT i.*, m.name AS mName, u.name AS uName, u.identityCard, u.gender, v.name AS vName, d.name AS dName, p.name AS pName");
+				"SELECT i.*, m.name AS mName, u.name AS uName, u.identityCard, u.gender, u.dob, u.idVillage, v.name AS vName, v.idDistrict, d.name AS dName, d.idProvince, p.name AS pName");
 		sql.append(" FROM insurance AS i");
 		sql.append(" INNER JOIN method AS m ON m.id = i.idMethod");
 		sql.append(" INNER JOIN user AS u ON u.id = i.idUser");
@@ -89,19 +89,22 @@ public class InsuranceDaoImpl extends DaoConnection implements InsuranceDao {
 				insurance.setRegDate(new Date(resultSet.getDate("regDate").getTime()));
 				insurance.setStatus(resultSet.getInt("status"));
 				Method method = new Method();
-				method.setId(resultSet.getInt("idMethod"));
 				method.setName(resultSet.getString("mName"));
 				insurance.setMethod(method);
 				User user = new User();
 				user.setName(resultSet.getString("uName"));
 				user.setGender(resultSet.getString("gender"));
+				user.setDob(new Date(resultSet.getDate("dob").getTime()));
 				user.setIdentityCard(resultSet.getLong("identityCard"));
 				Province province = new Province();
+				province.setId(resultSet.getString("idProvince"));
 				province.setName(resultSet.getString("pName"));
 				District district = new District();
+				district.setId(resultSet.getString("idDistrict"));
 				district.setName(resultSet.getString("dName"));
 				district.setProvince(province);
 				Village village = new Village();
+				village.setId(resultSet.getString("idVillage"));
 				village.setName(resultSet.getString("vName"));
 				village.setDistrict(district);
 				user.setVillage(village);
@@ -124,7 +127,7 @@ public class InsuranceDaoImpl extends DaoConnection implements InsuranceDao {
 		StringBuilder sql = new StringBuilder();
 		sql.append("SELECT * FROM (SELECT ROW_NUMBER() OVER(ORDER BY i.regDate, i.id) AS row_num,");
 		sql.append(
-				" i.*, m.name AS mName, u.name AS uName, u.identityCard, u.gender, v.name AS vName, d.name AS dName, p.name AS pName");
+				" i.*, m.name AS mName, u.name AS uName, u.identityCard, u.gender, u.dob, u.idVillage, v.name AS vName, v.idDistrict, d.name AS dName, d.idProvince, p.name AS pName");
 		sql.append(" FROM insurance AS i");
 		sql.append(" INNER JOIN method AS m ON m.id = i.idMethod");
 		sql.append(" INNER JOIN user AS u ON u.id = i.idUser");
@@ -194,13 +197,17 @@ public class InsuranceDaoImpl extends DaoConnection implements InsuranceDao {
 				User user = new User();
 				user.setName(resultSet.getString("uName"));
 				user.setGender(resultSet.getString("gender"));
+				user.setDob(new Date(resultSet.getDate("dob").getTime()));
 				user.setIdentityCard(resultSet.getLong("identityCard"));
 				Province province = new Province();
+				province.setId(resultSet.getString("idProvince"));
 				province.setName(resultSet.getString("pName"));
 				District district = new District();
+				district.setId(resultSet.getString("idDistrict"));
 				district.setName(resultSet.getString("dName"));
 				district.setProvince(province);
 				Village village = new Village();
+				village.setId(resultSet.getString("idVillage"));
 				village.setName(resultSet.getString("vName"));
 				village.setDistrict(district);
 				user.setVillage(village);

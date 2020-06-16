@@ -9,11 +9,14 @@ import java.util.List;
 
 import dao.DaoConnection;
 import dao.UserGettingHistoryDao;
+import model.District;
 import model.Insurance;
 import model.Paging;
+import model.Province;
 import model.Search;
 import model.User;
 import model.UserGettingHistory;
+import model.Village;
 
 public class UserGettingHistoryDaoImpl extends DaoConnection implements UserGettingHistoryDao {
 
@@ -23,7 +26,7 @@ public class UserGettingHistoryDaoImpl extends DaoConnection implements UserGett
 //		Connection connection = pool.getConnection();
 		List<UserGettingHistory> histories = new ArrayList<UserGettingHistory>();
 		StringBuilder sql = new StringBuilder();
-		sql.append("SELECT gh.*, u.name AS uName, u.identityCard");
+		sql.append("SELECT gh.*, u.name AS uName, u.identityCard, u.dob, u.idVillage, v.idDistrict, d.idProvince");
 		sql.append(" FROM user_getting_history AS gh");
 		sql.append(" INNER JOIN insurance AS i ON i.id = gh.idInsurance");
 		sql.append(" INNER JOIN user AS u ON u.id = i.idUser");
@@ -93,6 +96,17 @@ public class UserGettingHistoryDaoImpl extends DaoConnection implements UserGett
 				User user = new User();
 				user.setName(resultSet.getString("uName"));
 				user.setIdentityCard(resultSet.getLong("identityCard"));
+				user.setDob(new Date(resultSet.getDate("dob").getTime()));
+				user.setIdentityCard(resultSet.getLong("identityCard"));
+				Province province = new Province();
+				province.setId(resultSet.getString("idProvince"));
+				District district = new District();
+				district.setId(resultSet.getString("idDistrict"));
+				district.setProvince(province);
+				Village village = new Village();
+				village.setId(resultSet.getString("idVillage"));
+				village.setDistrict(district);
+				user.setVillage(village);
 				insurance.setUser(user);
 				history.setInsurance(insurance);
 				history.setTime(new Date(resultSet.getDate("time").getTime()));
@@ -118,7 +132,7 @@ public class UserGettingHistoryDaoImpl extends DaoConnection implements UserGett
 		List<UserGettingHistory> histories = new ArrayList<UserGettingHistory>();
 		StringBuilder sql = new StringBuilder();
 		sql.append("SELECT * FROM (SELECT ROW_NUMBER() OVER(ORDER BY gh.time, gh.id) AS row_num,");
-		sql.append(" gh.*, u.name AS uName, u.identityCard");
+		sql.append(" gh.*, u.name AS uName, u.identityCard, u.dob, u.idVillage, v.idDistrict, d.idProvince");
 		sql.append(" FROM user_getting_history AS gh");
 		sql.append(" INNER JOIN insurance AS i ON i.id = gh.idInsurance");
 		sql.append(" INNER JOIN user AS u ON u.id = i.idUser");
@@ -191,6 +205,17 @@ public class UserGettingHistoryDaoImpl extends DaoConnection implements UserGett
 				User user = new User();
 				user.setName(resultSet.getString("uName"));
 				user.setIdentityCard(resultSet.getLong("identityCard"));
+				user.setDob(new Date(resultSet.getDate("dob").getTime()));
+				user.setIdentityCard(resultSet.getLong("identityCard"));
+				Province province = new Province();
+				province.setId(resultSet.getString("idProvince"));
+				District district = new District();
+				district.setId(resultSet.getString("idDistrict"));
+				district.setProvince(province);
+				Village village = new Village();
+				village.setId(resultSet.getString("idVillage"));
+				village.setDistrict(district);
+				user.setVillage(village);
 				insurance.setUser(user);
 				history.setInsurance(insurance);
 				history.setTime(new Date(resultSet.getDate("time").getTime()));
