@@ -1,6 +1,5 @@
 package dao.impl;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,15 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dao.AfterDeathModeDao;
-import dao.Dao;
+import dao.DaoConnection;
 import model.AfterDeathMode;
 
-public class AfterDeathModeDaoImpl implements AfterDeathModeDao {
+public class AfterDeathModeDaoImpl extends DaoConnection implements AfterDeathModeDao {
 
 	@Override
 	public void insert(AfterDeathMode afterDeathMode) {
-		Dao pool = Dao.getInstance();
-		Connection connection = pool.getConnection();
+		//Dao pool = Dao.getInstance();
+		//Connection connection = pool.getConnection();
 		String sql = "INSERT INTO after_death_mode(time, month, status, reduction) VALUES(?, ?, ?, ?)";
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -31,17 +30,17 @@ public class AfterDeathModeDaoImpl implements AfterDeathModeDao {
 				afterDeathMode.setId(resultSet.getInt(1));
 			}
 		} catch (SQLException e) {
-			pool.freeConnection(connection);
+			//pool.freeConnection(connection);
 			e.printStackTrace();
 		}
-		pool.freeConnection(connection);
+		//pool.freeConnection(connection);
 
 	}
 
 	@Override
 	public void update(AfterDeathMode afterDeathMode) {
-		Dao pool = Dao.getInstance();
-		Connection connection = pool.getConnection();
+		//Dao pool = Dao.getInstance();
+		//Connection connection = pool.getConnection();
 		String sql = "UPDATE after_death_mode SET time = ?, month = ?, status = ?, reduction = ? WHERE id = ?";
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -52,33 +51,33 @@ public class AfterDeathModeDaoImpl implements AfterDeathModeDao {
 			preparedStatement.setInt(5, afterDeathMode.getId());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			pool.freeConnection(connection);
+			//pool.freeConnection(connection);
 			e.printStackTrace();
 		}
-		pool.freeConnection(connection);
+		//pool.freeConnection(connection);
 
 	}
 
 	@Override
 	public void delete(int id) {
-		Dao pool = Dao.getInstance();
-		Connection connection = pool.getConnection();
+		//Dao pool = Dao.getInstance();
+		//Connection connection = pool.getConnection();
 		String sql = "DELETE FROM after_death_mode WHERE id = ?";
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, id);
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			pool.freeConnection(connection);
+			//pool.freeConnection(connection);
 			e.printStackTrace();
 		}
-		pool.freeConnection(connection);
+		//pool.freeConnection(connection);
 	}
 
 	@Override
 	public AfterDeathMode get(int id) {
-		Dao pool = Dao.getInstance();
-		Connection connection = pool.getConnection();
+		//Dao pool = Dao.getInstance();
+		//Connection connection = pool.getConnection();
 		String sql = "SELECT * FROM after_death_mode WHERE id = ?";
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -94,17 +93,17 @@ public class AfterDeathModeDaoImpl implements AfterDeathModeDao {
 				return mode;
 			}
 		} catch (SQLException e) {
-			pool.freeConnection(connection);
+			//pool.freeConnection(connection);
 			e.printStackTrace();
 		}
-		pool.freeConnection(connection);
+		//pool.freeConnection(connection);
 		return null;
 	}
 
 	@Override
 	public List<AfterDeathMode> getAll() {
-		Dao pool = Dao.getInstance();
-		Connection connection = pool.getConnection();
+		//Dao pool = Dao.getInstance();
+		//Connection connection = pool.getConnection();
 		List<AfterDeathMode> modes = new ArrayList<AfterDeathMode>();
 		String sql = "SELECT * FROM after_death_mode";
 		try {
@@ -120,10 +119,10 @@ public class AfterDeathModeDaoImpl implements AfterDeathModeDao {
 				modes.add(mode);
 			}
 		} catch (SQLException e) {
-			pool.freeConnection(connection);
+			//pool.freeConnection(connection);
 			e.printStackTrace();
 		}
-		pool.freeConnection(connection);
+		//pool.freeConnection(connection);
 		return modes;
 	}
 

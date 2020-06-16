@@ -1,6 +1,5 @@
 package dao.impl;
 
-import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import dao.Dao;
+import dao.DaoConnection;
 import dao.InsuranceDao;
 import model.District;
 import model.Insurance;
@@ -19,13 +18,13 @@ import model.Search;
 import model.User;
 import model.Village;
 
-public class InsuranceDaoImpl implements InsuranceDao {
+public class InsuranceDaoImpl extends DaoConnection implements InsuranceDao {
 
 	@Override
 	public List<Insurance> search(Search search) {
 		List<Insurance> insurances = new ArrayList<Insurance>();
-		Dao pool = Dao.getInstance();
-		Connection connection = pool.getConnection();
+//		Dao pool = Dao.getInstance();
+//		Connection connection = pool.getConnection();
 		StringBuilder sql = new StringBuilder();
 		sql.append(
 				"SELECT i.*, m.name AS mName, u.name AS uName, u.identityCard, u.gender, v.name AS vName, d.name AS dName, p.name AS pName");
@@ -110,18 +109,18 @@ public class InsuranceDaoImpl implements InsuranceDao {
 				insurances.add(insurance);
 			}
 		} catch (SQLException e) {
-			pool.freeConnection(connection);
+			//pool.freeConnection(connection);
 			e.printStackTrace();
 		}
-		pool.freeConnection(connection);
+		//pool.freeConnection(connection);
 		return insurances;
 	}
 
 	@Override
 	public List<Insurance> searchWithPaging(Search search, Paging paging) {
 		List<Insurance> insurances = new ArrayList<Insurance>();
-		Dao pool = Dao.getInstance();
-		Connection connection = pool.getConnection();
+//		Dao pool = Dao.getInstance();
+//		Connection connection = pool.getConnection();
 		StringBuilder sql = new StringBuilder();
 		sql.append("SELECT * FROM (SELECT ROW_NUMBER() OVER(ORDER BY i.regDate, i.id) AS row_num,");
 		sql.append(
@@ -209,17 +208,17 @@ public class InsuranceDaoImpl implements InsuranceDao {
 				insurances.add(insurance);
 			}
 		} catch (SQLException e) {
-			pool.freeConnection(connection);
+			//pool.freeConnection(connection);
 			e.printStackTrace();
 		}
-		pool.freeConnection(connection);
+		//pool.freeConnection(connection);
 		return insurances;
 	}
 
 	@Override
 	public int getTotalRecord(Search search) {
-		Dao pool = Dao.getInstance();
-		Connection connection = pool.getConnection();
+		//Dao pool = Dao.getInstance();
+		//Connection connection = pool.getConnection();
 		StringBuilder sql = new StringBuilder();
 		sql.append(
 				"SELECT COUNT(row_num) AS totalRecord FROM (SELECT ROW_NUMBER() OVER(ORDER BY i.regDate, i.id) AS row_num");
@@ -281,14 +280,14 @@ public class InsuranceDaoImpl implements InsuranceDao {
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				int total = resultSet.getInt("totalRecord");
-				pool.freeConnection(connection);
+				//pool.freeConnection(connection);
 				return total;
 			}
 		} catch (Exception e) {
-			pool.freeConnection(connection);
+			//pool.freeConnection(connection);
 			e.printStackTrace();
 		}
-		pool.freeConnection(connection);
+		//pool.freeConnection(connection);
 		return 0;
 	}
 

@@ -1,23 +1,22 @@
 package dao.impl;
 
-import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import dao.Dao;
+import dao.DaoConnection;
 import dao.UserDao;
 import model.Role;
 import model.User;
 import model.Village;
 
-public class UserDaoImpl implements UserDao {
+public class UserDaoImpl extends DaoConnection implements UserDao {
 
 	@Override
 	public User get(String username) {
-		Dao pool = Dao.getInstance();
-		Connection connection = pool.getConnection();
+//		Dao pool = Dao.getInstance();
+//		Connection connection = pool.getConnection();
 		String sql = "SELECT u.*, r.name AS roleName FROM user AS u INNER JOIN role AS r ON u.idRole = r.id WHERE u.username like ?";
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -43,14 +42,14 @@ public class UserDaoImpl implements UserDao {
 				village.setId(resultSet.getString("idVillage"));
 				user.setVillage(village);
 				user.setIsActive(resultSet.getBoolean("isActive"));
-				pool.freeConnection(connection);
+				//pool.freeConnection(connection);
 				return user;
 			}
 		} catch (SQLException e) {
-			pool.freeConnection(connection);
+			//pool.freeConnection(connection);
 			e.printStackTrace();
 		}
-		pool.freeConnection(connection);
+		//pool.freeConnection(connection);
 		return null;
 	}
 

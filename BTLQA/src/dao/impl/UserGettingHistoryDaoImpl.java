@@ -1,6 +1,5 @@
 package dao.impl;
 
-import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import dao.Dao;
+import dao.DaoConnection;
 import dao.UserGettingHistoryDao;
 import model.Insurance;
 import model.Paging;
@@ -16,12 +15,12 @@ import model.Search;
 import model.User;
 import model.UserGettingHistory;
 
-public class UserGettingHistoryDaoImpl implements UserGettingHistoryDao {
+public class UserGettingHistoryDaoImpl extends DaoConnection implements UserGettingHistoryDao {
 
 	@Override
 	public List<UserGettingHistory> search(Search search) {
-		Dao pool = Dao.getInstance();
-		Connection connection = pool.getConnection();
+//		Dao pool = Dao.getInstance();
+//		Connection connection = pool.getConnection();
 		List<UserGettingHistory> histories = new ArrayList<UserGettingHistory>();
 		StringBuilder sql = new StringBuilder();
 		sql.append("SELECT gh.*, u.name AS uName, u.identityCard");
@@ -105,17 +104,17 @@ public class UserGettingHistoryDaoImpl implements UserGettingHistoryDao {
 				histories.add(history);
 			}
 		} catch (SQLException e) {
-			pool.freeConnection(connection);
+			//pool.freeConnection(connection);
 			e.printStackTrace();
 		}
-		pool.freeConnection(connection);
+		//pool.freeConnection(connection);
 		return histories;
 	}
 
 	@Override
 	public List<UserGettingHistory> searchWithPaging(Search search, Paging paging) {
-		Dao pool = Dao.getInstance();
-		Connection connection = pool.getConnection();
+//		Dao pool = Dao.getInstance();
+//		Connection connection = pool.getConnection();
 		List<UserGettingHistory> histories = new ArrayList<UserGettingHistory>();
 		StringBuilder sql = new StringBuilder();
 		sql.append("SELECT * FROM (SELECT ROW_NUMBER() OVER(ORDER BY gh.time, gh.id) AS row_num,");
@@ -203,17 +202,17 @@ public class UserGettingHistoryDaoImpl implements UserGettingHistoryDao {
 				histories.add(history);
 			}
 		} catch (SQLException e) {
-			pool.freeConnection(connection);
+			//pool.freeConnection(connection);
 			e.printStackTrace();
 		}
-		pool.freeConnection(connection);
+		//pool.freeConnection(connection);
 		return histories;
 	}
 
 	@Override
 	public int getTotalRecord(Search search) {
-		Dao pool = Dao.getInstance();
-		Connection connection = pool.getConnection();
+//		Dao pool = Dao.getInstance();
+//		Connection connection = pool.getConnection();
 		StringBuilder sql = new StringBuilder();
 		sql.append(
 				"SELECT COUNT(row_num) AS totalRecord FROM (SELECT ROW_NUMBER() OVER(ORDER BY gh.time, gh.id) AS row_num");
@@ -281,14 +280,14 @@ public class UserGettingHistoryDaoImpl implements UserGettingHistoryDao {
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				int total = resultSet.getInt("totalRecord");
-				pool.freeConnection(connection);
+				//pool.freeConnection(connection);
 				return total;
 			}
 		} catch (SQLException e) {
-			pool.freeConnection(connection);
+			//pool.freeConnection(connection);
 			e.printStackTrace();
 		}
-		pool.freeConnection(connection);
+		//pool.freeConnection(connection);
 		return 0;
 	}
 

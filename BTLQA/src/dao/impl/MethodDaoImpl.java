@@ -1,6 +1,5 @@
 package dao.impl;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,16 +7,16 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import dao.Dao;
+import dao.DaoConnection;
 import dao.MethodDao;
 import model.Method;
 
-public class MethodDaoImpl implements MethodDao {
+public class MethodDaoImpl extends DaoConnection implements MethodDao {
 
 	@Override
 	public void insert(Method method) {
-		Dao pool = Dao.getInstance();
-		Connection connection = pool.getConnection();
+//		Dao pool = Dao.getInstance();
+//		Connection connection = pool.getConnection();
 		String sql = "INSERT INTO method(month, name) VALUES(?, ?)";
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -29,16 +28,16 @@ public class MethodDaoImpl implements MethodDao {
 				method.setId(resultSet.getInt(1));
 			}
 		} catch (SQLException e) {
-			pool.freeConnection(connection);
+			// pool.freeConnection(connection);
 			e.printStackTrace();
 		}
-		pool.freeConnection(connection);
+		// pool.freeConnection(connection);
 	}
 
 	@Override
 	public void update(Method method) {
-		Dao pool = Dao.getInstance();
-		Connection connection = pool.getConnection();
+//		Dao pool = Dao.getInstance();
+//		Connection connection = pool.getConnection();
 		String sql = "UPDATE method SET month = ?, name = ? WHERE id = ?";
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -47,32 +46,32 @@ public class MethodDaoImpl implements MethodDao {
 			preparedStatement.setInt(3, method.getId());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			pool.freeConnection(connection);
+			// pool.freeConnection(connection);
 			e.printStackTrace();
 		}
-		pool.freeConnection(connection);
+		// pool.freeConnection(connection);
 	}
 
 	@Override
 	public void delete(int id) {
-		Dao pool = Dao.getInstance();
-		Connection connection = pool.getConnection();
+//		Dao pool = Dao.getInstance();
+//		Connection connection = pool.getConnection();
 		String sql = "DELETE FROM method WHERE id = ?";
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			preparedStatement.setInt(1, id);
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			pool.freeConnection(connection);
+			// pool.freeConnection(connection);
 			e.printStackTrace();
 		}
-		pool.freeConnection(connection);
+		// pool.freeConnection(connection);
 	}
 
 	@Override
 	public Method get(int id) {
-		Dao pool = Dao.getInstance();
-		Connection connection = pool.getConnection();
+//		Dao pool = Dao.getInstance();
+//		Connection connection = pool.getConnection();
 		String sql = "SELECT * FROM method WHERE id = ?";
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -86,17 +85,17 @@ public class MethodDaoImpl implements MethodDao {
 				return method;
 			}
 		} catch (SQLException e) {
-			pool.freeConnection(connection);
+			// pool.freeConnection(connection);
 			e.printStackTrace();
 		}
-		pool.freeConnection(connection);
+		// pool.freeConnection(connection);
 		return null;
 	}
 
 	@Override
 	public List<Method> getAll() {
-		Dao pool = Dao.getInstance();
-		Connection connection = pool.getConnection();
+//		Dao pool = Dao.getInstance();
+//		Connection connection = pool.getConnection();
 		List<Method> methods = new ArrayList<Method>();
 		String sql = "SELECT * FROM method";
 		try {
@@ -110,10 +109,10 @@ public class MethodDaoImpl implements MethodDao {
 				methods.add(method);
 			}
 		} catch (SQLException e) {
-			pool.freeConnection(connection);
+			// pool.freeConnection(connection);
 			e.printStackTrace();
 		}
-		pool.freeConnection(connection);
+		// pool.freeConnection(connection);
 		return methods;
 	}
 

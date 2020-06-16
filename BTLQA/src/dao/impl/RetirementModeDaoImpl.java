@@ -1,6 +1,5 @@
 package dao.impl;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,16 +7,16 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import dao.Dao;
+import dao.DaoConnection;
 import dao.RetirementModeDao;
 import model.RetirementMode;
 
-public class RetirementModeDaoImpl implements RetirementModeDao {
+public class RetirementModeDaoImpl extends DaoConnection implements RetirementModeDao {
 
 	@Override
 	public void insert(RetirementMode retirementMode) {
-		Dao pool = Dao.getInstance();
-		Connection connection = pool.getConnection();
+//		Dao pool = Dao.getInstance();
+//		Connection connection = pool.getConnection();
 		String sql = "INSERT INTO retirement_mode(year, gender, old, percentMin, percentMax, increase, time) VALUES(?, ?, ?, ?, ?, ?, ?)";
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -34,16 +33,16 @@ public class RetirementModeDaoImpl implements RetirementModeDao {
 				retirementMode.setId(resultSet.getInt(1));
 			}
 		} catch (SQLException e) {
-			pool.freeConnection(connection);
+			//pool.freeConnection(connection);
 			e.printStackTrace();
 		}
-		pool.freeConnection(connection);
+		//pool.freeConnection(connection);
 	}
 
 	@Override
 	public void update(RetirementMode retirementMode) {
-		Dao pool = Dao.getInstance();
-		Connection connection = pool.getConnection();
+//		Dao pool = Dao.getInstance();
+//		Connection connection = pool.getConnection();
 		String sql = "UPDATE retirement_mode SET year = ?, gender = ?, old = ?, percentMin = ?, percentMax = ?, increase = ?, time= ? WHERE id = ?";
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -57,32 +56,32 @@ public class RetirementModeDaoImpl implements RetirementModeDao {
 			preparedStatement.setInt(8, retirementMode.getId());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			pool.freeConnection(connection);
+			//pool.freeConnection(connection);
 			e.printStackTrace();
 		}
-		pool.freeConnection(connection);
+		//pool.freeConnection(connection);
 	}
 
 	@Override
 	public void delete(int id) {
-		Dao pool = Dao.getInstance();
-		Connection connection = pool.getConnection();
+//		Dao pool = Dao.getInstance();
+//		Connection connection = pool.getConnection();
 		String sql = "DELETE FROM retirement_mode WHERE id = ?";
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, id);
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			pool.freeConnection(connection);
+			//pool.freeConnection(connection);
 			e.printStackTrace();
 		}
-		pool.freeConnection(connection);
+		//pool.freeConnection(connection);
 	}
 
 	@Override
 	public RetirementMode get(int id) {
-		Dao pool = Dao.getInstance();
-		Connection connection = pool.getConnection();
+//		Dao pool = Dao.getInstance();
+//		Connection connection = pool.getConnection();
 		String sql = "SELECT * FROM retirement_mode WHERE id = ?";
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -101,17 +100,17 @@ public class RetirementModeDaoImpl implements RetirementModeDao {
 				return mode;
 			}
 		} catch (SQLException e) {
-			pool.freeConnection(connection);
+			//pool.freeConnection(connection);
 			e.printStackTrace();
 		}
-		pool.freeConnection(connection);
+		//pool.freeConnection(connection);
 		return null;
 	}
 
 	@Override
 	public List<RetirementMode> getAll() {
-		Dao pool = Dao.getInstance();
-		Connection connection = pool.getConnection();
+//		Dao pool = Dao.getInstance();
+//		Connection connection = pool.getConnection();
 		List<RetirementMode> modes = new ArrayList<RetirementMode>();
 		String sql = "SELECT * FROM retirement_mode";
 		try {
@@ -130,10 +129,10 @@ public class RetirementModeDaoImpl implements RetirementModeDao {
 				modes.add(mode);
 			}
 		} catch (SQLException e) {
-			pool.freeConnection(connection);
+			//pool.freeConnection(connection);
 			e.printStackTrace();
 		}
-		pool.freeConnection(connection);
+		//pool.freeConnection(connection);
 		return modes;
 	}
 

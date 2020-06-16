@@ -1,7 +1,2 @@
-/controller/
+/test/
 /dao/
-/filter/
-/model/
-/service/
-/utils/
-/webservice/

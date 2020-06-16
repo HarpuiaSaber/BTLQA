@@ -1,6 +1,5 @@
 package dao.impl;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,16 +7,16 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import dao.Dao;
+import dao.DaoConnection;
 import dao.DeathModeDao;
 import model.DeathMode;
 
-public class DeathModeDaoImpl implements DeathModeDao {
+public class DeathModeDaoImpl extends DaoConnection implements DeathModeDao {
 
 	@Override
 	public void insert(DeathMode deathMode) {
-		Dao pool = Dao.getInstance();
-		Connection connection = pool.getConnection();
+//		Dao pool = Dao.getInstance();
+//		Connection connection = pool.getConnection();
 		String sql = "INSERT INTO death_mode(baseSalary, coefficient, year) VALUES(?, ?, ?)";
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -30,17 +29,17 @@ public class DeathModeDaoImpl implements DeathModeDao {
 				deathMode.setId(resultSet.getInt(1));
 			}
 		} catch (SQLException e) {
-			pool.freeConnection(connection);
+			//pool.freeConnection(connection);
 			e.printStackTrace();
 		}
-		pool.freeConnection(connection);
+		//pool.freeConnection(connection);
 
 	}
 
 	@Override
 	public void update(DeathMode deathMode) {
-		Dao pool = Dao.getInstance();
-		Connection connection = pool.getConnection();
+//		Dao pool = Dao.getInstance();
+//		Connection connection = pool.getConnection();
 		String sql = "UPDATE death_mode SET baseSalary = ?, coefficient = ?, year = ? WHERE id = ?";
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -50,33 +49,33 @@ public class DeathModeDaoImpl implements DeathModeDao {
 			preparedStatement.setInt(4, deathMode.getId());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			pool.freeConnection(connection);
+			//pool.freeConnection(connection);
 			e.printStackTrace();
 		}
-		pool.freeConnection(connection);
+		//pool.freeConnection(connection);
 
 	}
 
 	@Override
 	public void delete(int id) {
-		Dao pool = Dao.getInstance();
-		Connection connection = pool.getConnection();
+//		Dao pool = Dao.getInstance();
+//		Connection connection = pool.getConnection();
 		String sql = "DELETE FROM death_mode WHERE id = ?";
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, id);
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			pool.freeConnection(connection);
+			//pool.freeConnection(connection);
 			e.printStackTrace();
 		}
-		pool.freeConnection(connection);
+		//pool.freeConnection(connection);
 	}
 
 	@Override
 	public DeathMode get(int id) {
-		Dao pool = Dao.getInstance();
-		Connection connection = pool.getConnection();
+//		Dao pool = Dao.getInstance();
+//		Connection connection = pool.getConnection();
 		String sql = "SELECT * FROM death_mode WHERE id = ?";
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -91,17 +90,17 @@ public class DeathModeDaoImpl implements DeathModeDao {
 				return mode;
 			}
 		} catch (SQLException e) {
-			pool.freeConnection(connection);
+			//pool.freeConnection(connection);
 			e.printStackTrace();
 		}
-		pool.freeConnection(connection);
+		//pool.freeConnection(connection);
 		return null;
 	}
 
 	@Override
 	public List<DeathMode> getAll() {
-		Dao pool = Dao.getInstance();
-		Connection connection = pool.getConnection();
+//		Dao pool = Dao.getInstance();
+//		Connection connection = pool.getConnection();
 		List<DeathMode> modes = new ArrayList<DeathMode>();
 		String sql = "SELECT * FROM death_mode";
 		try {
@@ -116,10 +115,10 @@ public class DeathModeDaoImpl implements DeathModeDao {
 				modes.add(mode);
 			}
 		} catch (SQLException e) {
-			pool.freeConnection(connection);
+			//pool.freeConnection(connection);
 			e.printStackTrace();
 		}
-		pool.freeConnection(connection);
+		//pool.freeConnection(connection);
 		return modes;
 	}
 }

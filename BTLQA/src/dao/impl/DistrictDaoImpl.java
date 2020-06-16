@@ -1,23 +1,22 @@
 package dao.impl;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import dao.Dao;
+import dao.DaoConnection;
 import dao.DistrictDao;
 import model.District;
 import model.Province;
 
-public class DistrictDaoImpl implements DistrictDao{
+public class DistrictDaoImpl extends DaoConnection implements DistrictDao{
 
 	@Override
 	public List<District> getByProvinceId(String id) {
-		Dao pool = Dao.getInstance();
-		Connection connection = pool.getConnection();
+//		Dao pool = Dao.getInstance();
+//		Connection connection = pool.getConnection();
 		List<District> districts = new ArrayList<District>();
 		String sql = "SELECT d.id, d.name FROM district AS d where d.idProvince like ?";
 		try {
@@ -34,10 +33,10 @@ public class DistrictDaoImpl implements DistrictDao{
 				districts.add(district);
 			}
 		} catch (SQLException e) {
-			pool.freeConnection(connection);
+			//pool.freeConnection(connection);
 			e.printStackTrace();
 		}
-		pool.freeConnection(connection);
+		//pool.freeConnection(connection);
 		return districts;
 	}
 
