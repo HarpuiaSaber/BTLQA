@@ -19,7 +19,7 @@ public class TestPaymenHistoryDao {
 	private Search search;
 
 	@Test
-	public void test1() {
+	public void search1() {
 		// init
 		String idProvince = "36";
 		search = new Search();
@@ -37,7 +37,7 @@ public class TestPaymenHistoryDao {
 	}
 
 	@Test
-	public void test2() {
+	public void search2() {
 		// init
 		String idDistrict = "339";
 		search = new Search();
@@ -54,7 +54,7 @@ public class TestPaymenHistoryDao {
 	}
 
 	@Test
-	public void test3() {
+	public void search3() {
 		// init
 		String idVillage = "12658";
 		search = new Search();
@@ -71,7 +71,7 @@ public class TestPaymenHistoryDao {
 	}
 
 	@Test
-	public void test4() {
+	public void search4() {
 		// init
 		String idProvince = "34";
 		String idDistrict = "339";
@@ -92,7 +92,7 @@ public class TestPaymenHistoryDao {
 	}
 
 	@Test
-	public void test5() {
+	public void search5() {
 		// init
 		String idProvince = "34";
 		String idDistrict = "339";
@@ -114,7 +114,7 @@ public class TestPaymenHistoryDao {
 	}
 
 	@Test
-	public void test6() {
+	public void search6() {
 		// init
 		String name = "Nguyễn Quang Toàn";
 		search = new Search();
@@ -131,7 +131,7 @@ public class TestPaymenHistoryDao {
 	}
 
 	@Test
-	public void test7() {
+	public void search7() {
 		// init
 		Long identityCard = 152225247L;
 		search = new Search();
@@ -148,7 +148,7 @@ public class TestPaymenHistoryDao {
 	}
 
 	@Test
-	public void test8() {
+	public void search8() {
 		// init
 		Date dob = StringUtils.convertToDate("1998-01-07");
 		search = new Search();
@@ -165,7 +165,7 @@ public class TestPaymenHistoryDao {
 	}
 
 	@Test
-	public void test9() {
+	public void search9() {
 		// init
 		Date startDate = StringUtils.convertToDate("2020-03-05");
 		search = new Search();
@@ -182,7 +182,7 @@ public class TestPaymenHistoryDao {
 	}
 
 	@Test
-	public void test10() {
+	public void search10() {
 		// init
 		Date endDate = StringUtils.convertToDate("2020-06-05");
 		search = new Search();
@@ -199,7 +199,7 @@ public class TestPaymenHistoryDao {
 	}
 
 	@Test
-	public void test11() {
+	public void search11() {
 		// init
 		Date startDate = StringUtils.convertToDate("2020-03-05");
 		Date endDate = StringUtils.convertToDate("2020-06-05");
@@ -221,7 +221,7 @@ public class TestPaymenHistoryDao {
 	// exception
 
 	@Test
-	public void test12() {
+	public void search12() {
 		// init
 		Date startDate = StringUtils.convertToDate("2020-06-05");
 		Date endDate = StringUtils.convertToDate("2020-03-05");
@@ -237,7 +237,7 @@ public class TestPaymenHistoryDao {
 	}
 
 	@Test
-	public void test13() {
+	public void search13() {
 		// init
 		String name = "ko co ten";
 		search = new Search();
@@ -251,7 +251,7 @@ public class TestPaymenHistoryDao {
 	}
 
 	@Test
-	public void test14() {
+	public void search14() {
 		// init
 		Long identityCard = 12345678956L;
 		search = new Search();
