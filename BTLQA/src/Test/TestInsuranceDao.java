@@ -219,4 +219,31 @@ public class TestInsuranceDao {
 		Assert.assertEquals(0, insurances.size());
 		
 	}
+	
+	@Test
+	public void search13() {
+		// init
+		String name = "ten la   gi";
+		search = new Search();
+		search.setName(name);
+		// get result by dao function
+		insurances = insuranceDao.search(search);
+		// test
+		Assert.assertNotNull(insurances);
+		Assert.assertEquals(0, insurances.size());
+	}
+	
+	@Test
+	public void search14() {
+		// init
+		Long identityCard = 12345678956L;
+		search = new Search();
+		search.setIdentityCard(identityCard);
+		// get result by dao function
+		insurances = insuranceDao.search(search);
+		// test
+		Assert.assertNotNull(insurances);
+		Assert.assertEquals(0, insurances.size());
+		
+	}
 }
